@@ -1,0 +1,125 @@
+{
+  "name": "md-editor",
+  "version": "0.1.0",
+  "private": true,
+  "main": "main.js",
+  "author": "XH",
+  "description": "Online Markdown Editor using Qiniu cloud service",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "electron-store": "^5.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "buildMain": "webpack",
+    "startElevtron": "nodemon --watch main.js --exec \"electron .\"",
+    "dev": "concurrently \"wait-on http://localhost:3000 && npm run startElevtron\" \"cross-env BROWSER=none npm start\"",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "prepack": "npm run build && npm run buildMain",
+    "predist": "npm run build && npm run buildMain"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "homepage": "./",
+  "build": {
+    "appId": "com.electron.xh",
+    "productName": "MarkDown云编辑",
+    "copyright": "Copyright © 2020 ${author}",
+    "extends": null,
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "settings/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "extraMetadata": {
+      "main": "./build/main.js"
+    },
+    "dmg": {
+      "background": "assets/appdmg.png",
+      "icon": "assets/icon.icns",
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 380,
+          "y": 280,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 110,
+          "y": 280,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 500,
+        "height": 500
+      }
+    },
+    "win": {
+      "target": [
+        "msi",
+        "nsis"
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}-Web-Setup-${version}.${ext}",
+      "publisherName": "XH"
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": false
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-brands-svg-icons": "^5.13.0",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
+    "@testing-library/jest-dom": "^5.9.0",
+    "@testing-library/react": "^10.0.6",
+    "@testing-library/user-event": "^11.0.0",
+    "axios": "^0.19.2",
+    "classnames": "^2.2.6",
+    "concurrently": "^5.2.0",
+    "cross-env": "^7.0.2",
+    "devtron": "^1.4.0",
+    "electron": "^8.3.1",
+    "electron-builder": "^21.2.0",
+    "electron-is-dev": "^1.2.0",
+    "node-sass": "^4.14.0",
+    "nodemon": "^2.0.4",
+    "qiniu": "^7.3.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1",
+    "react-simplemde-editor": "^4.1.1",
+    "wait-on": "^4.0.2",
+    "webpack-cli": "^3.3.11"
+  }
+}
